@@ -3,12 +3,14 @@ import { datas } from "../Data"
 import { useState } from "react"
 import { useBasket } from "./BascketContext"
 import { useLikes } from "./LikesContext"
-
+import { useSearch } from "./SearchValue"
 function Home() {
     const { addBascket, addNum } = useBasket()
     const { addLike, liked } = useLikes()
     
     const [products, setProducts] = useState(datas)
+
+    const {value} = useSearch()
 
     const handleBuy = (id: string, title: string, price: number) => {
         const targetP = products.find(p => p.id === id)
@@ -27,9 +29,13 @@ function Home() {
         addNum(price)
     }
 
+    const filteredProduct = products.filter(i => 
+    i.title.toLowerCase().includes(value.toLowerCase())
+)
+
     return (
         <div className="flex flex-wrap justify-around gap-20 items-center">
-            {products.map((i) => {
+            {filteredProduct.map((i) => {
                 const isLiked = liked.includes(i.title);
 
                 return (

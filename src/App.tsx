@@ -6,6 +6,7 @@ import Likes from "./cpmponents/Likes";
 import Bascket from "./cpmponents/Bascket";
 import { BascketProvider } from "./cpmponents/BascketContext";
 import LikesContext from "./cpmponents/LikesContext";
+import { SearchProvider } from "./cpmponents/SearchValue";
 export function NotFound(){
   return (
     <h1 className="text-2xl mt-20 ml-20">Not found the page</h1>
@@ -18,6 +19,7 @@ function App() {
     <LikesContext>
     <BascketProvider>
     <BrowserRouter>
+    <SearchProvider>
     <Header />
 
 
@@ -27,7 +29,7 @@ function App() {
         <Route path="/Bascket" element={<Bascket />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
-
+      </SearchProvider>
     </BrowserRouter>
     </BascketProvider>
     </LikesContext>

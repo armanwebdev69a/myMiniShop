@@ -1,18 +1,21 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import type { FormEvent } from "react";
+import { useSearch } from "./SearchValue";
 
 function Header() {
   const [show, setShow] = useState(false);
   const [search, setSearch] = useState("");
+  const {addValue} = useSearch()
 
   function handleSearch(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-
+    
     if (!search.trim()) return;
 
     console.log("Search:", search.trim());
     // بعداً جست‌وجوی واقعی محصولات را اضافه کن.
+    addValue(search)
   }
 
   return (

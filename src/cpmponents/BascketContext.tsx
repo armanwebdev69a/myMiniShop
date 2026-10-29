@@ -6,7 +6,6 @@ interface Bascket {
     price:number,
     addNum : (newNum:number) =>void
 }
-
 const Bascket = createContext<Bascket|null>(null)
 
 export function BascketProvider( {children} : {children:React.ReactNode} ) {
