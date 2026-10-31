@@ -1,31 +1,34 @@
 import React, { createContext, useContext, useState } from "react"
 
-
-interface Like {
-    liked : string[],
-    addLike : (newLike:string) => void
+type likes = {
+    title:string,
+    price:number,
+    imgURL:string
 }
 
-const Likes = createContext<Like|null>(null)
+interface Likes {
+    likesArr:likes[],
+    addLike:(item:likes) =>void,
 
-function LikesContext({children}:{children:React.ReactNode}) {
-    const [liked,setLikes] = useState<string[]>([])
-    const addLike = (newLike:string)=>{
-        setLikes(prev=>[...prev,newLike])
+}
+const Likes = createContext<Likes|null>(null)
+
+export function LikesProvider( {children} : {children:React.ReactNode} ) {
+    const [likesArr,setLikes] = useState<likes[]>([])
+    const addLike = (item:likes)=>{
+        setLikes(prev => [...prev,item])
     }
   return (
-    <Likes.Provider value={{liked,addLike}}>
+    <Likes.Provider value={{likesArr,addLike}}>
         {children}
     </Likes.Provider>
   )
 }
 
 
-
-export default LikesContext
-
-export function useLikes(){
-    const context = useContext(Likes)
-    if (!context) throw Error("dd")
-    return context
+export function useLikes() {
+  const context = useContext(Likes)
+  if (!context) throw new Error("useBasket باید داخل BasketProvider استفاده بشه!");
+  return context;
 }
+

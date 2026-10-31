@@ -1,121 +1,86 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import type { FormEvent } from "react";
 import { useSearch } from "./SearchValue";
 
 function Header() {
   const [show, setShow] = useState(false);
   const [search, setSearch] = useState("");
-  const {addValue} = useSearch()
+  const { addValue } = useSearch();
 
-  function handleSearch(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    
-    if (!search.trim()) return;
+  useEffect(() => {
+    addValue(search);
+  }, [search, addValue]);
 
-    console.log("Search:", search.trim());
-    // بعداً جست‌وجوی واقعی محصولات را اضافه کن.
-    addValue(search)
-  }
+  const handleClose = () => {
+    setShow(false);
+    setSearch("");
+  };
 
   return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-[#111111] px-5 py-4 sm:px-10">
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-6">
+    <header className="sticky top-0 z-50 border-b border-base-300 bg-base-100/90 backdrop-blur">
+      <div className="navbar mx-auto max-w-7xl px-4 sm:px-8">
+        
+        <div className="navbar-start gap-2">
+          <div className="dropdown md:hidden">
+            <div tabIndex={0} role="button" className="btn btn-ghost btn-circle btn-sm">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h7" />
+              </svg>
+            </div>
+            <ul tabIndex={0} className="menu menu-sm dropdown-content bg-base-200 rounded-box z-10 mt-3 w-48 p-2 shadow-lg border border-base-300">
+              <li><Link to="/">خانه</Link></li>
+              <li><Link to="/likes">علاقه‌مندی‌ها</Link></li>
+              <li><Link to="/bascket">سبد خرید</Link></li>
+            </ul>
+          </div>  
 
-        {/* Logo */}
-        <Link
-          to="/"
-          className="shrink-0 text-xl font-semibold tracking-tight text-white"
-        >
-          mini<span className="font-normal text-gray-500">shop</span>
-        </Link>
-
-        {/* Navigation */}
-        <nav className="hidden items-center gap-8 md:flex">
-          <Link
-            to="/"
-            className="text-sm text-gray-300 transition hover:text-white"
-          >
-            خانه
+          <Link to="/" className="text-xl font-black tracking-tight text-primary">
+            mini<span className="font-normal text-base-content/70">shop</span>
           </Link>
+        </div>
 
-          <Link
-            to="/likes"
-            className="text-sm text-gray-400 transition hover:text-white"
-          >
-            علاقه‌مندی‌ها
-          </Link>
+        <div className="navbar-center hidden md:flex">
+          <ul className="menu menu-horizontal px-1 gap-1 text-base font-medium">
+            <li><Link to="/" className="hover:text-primary">خانه</Link></li>
+            <li><Link to="/likes" className="hover:text-primary">علاقه‌مندی‌ها</Link></li>
+            <li><Link to="/bascket" className="hover:text-primary">سبد خرید</Link></li>
+          </ul>
+        </div>
 
-          <Link
-            to="/bascket"
-            className="text-sm text-gray-400 transition hover:text-white"
-          >
-            سبد خرید
-          </Link>
-        </nav>
-
-        {/* Actions */}
-        <div className="flex items-center gap-2">
-          <form
-            onSubmit={handleSearch}
-            className={`flex items-center overflow-hidden rounded-lg border transition-all duration-200 ${
-              show
-                ? "w-48 border-white/20 bg-white/5 sm:w-64"
-                : "w-10 border-transparent"
-            }`}
-          >
-            {show && (
+        <div className="navbar-end">
+          {show ? (
+            <div className="flex items-center gap-1.5 animate-fadeIn">
               <input
-                dir="rtl"
-                type="search"
                 autoFocus
+                type="text"
+                dir="rtl"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                placeholder="جست‌وجوی محصول..."
-                aria-label="جست‌وجوی محصول"
-                className="min-w-0 flex-1 bg-transparent px-3 py-2 text-sm text-white outline-none placeholder:text-gray-500"
+                placeholder="اسم محصول..."
+                className="input input-sm sm:input-md input-bordered input-primary w-40 sm:w-64 focus:outline-none"
               />
-            )}
-
-            <button
-              type={show ? "submit" : "button"}
-              aria-label={show ? "جست‌وجو" : "باز کردن جست‌وجو"}
-              onClick={() => {
-                if (!show) setShow(true);
-                else if (!search.trim()) setShow(false);
-              }}
-              className="grid size-10 shrink-0 place-items-center text-gray-400 transition hover:text-white"
-            >
-              <svg
-                viewBox="0 0 24 24"
-                className="size-5"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.6"
-                strokeLinecap="round"
-                aria-hidden="true"
+              <button 
+                onClick={handleClose} 
+                className="btn btn-ghost btn-circle btn-sm"
+                title="بستن جستجو"
               >
-                <circle cx="10.8" cy="10.8" r="6.8" />
-                <path d="m16 16 4 4" />
+                ✕
+              </button>
+            </div>
+          ) : (
+            <button
+              onClick={() => setShow(true)}
+              className="btn btn-ghost btn-circle"
+              title="جستجو"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
             </button>
-          </form>
+          )}
         </div>
 
       </div>
-
-      {/* Mobile navigation */}
-      <nav className="mx-auto mt-4 flex max-w-7xl items-center gap-6 border-t border-white/10 pt-3 md:hidden">
-        <Link to="/" className="text-sm text-gray-300 hover:text-white">
-          خانه
-        </Link>
-        <Link to="/likes" className="text-sm text-gray-400 hover:text-white">
-          علاقه‌مندی‌ها
-        </Link>
-        <Link to="/basket" className="text-sm text-gray-400 hover:text-white">
-          سبد خرید
-        </Link>
-      </nav>
     </header>
   );
 }

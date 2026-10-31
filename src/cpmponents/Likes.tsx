@@ -1,12 +1,18 @@
 import { useLikes } from "./LikesContext"
 
 function Likes() {
-    const {liked} = useLikes()
+    const { likesArr } = useLikes()
   return (
-    <div className="flex justify-center mt-30 text-2xl">
-        محصولاتی که لایک کردید : {liked.map(i=>(
-            <span className="flex ml-3" key={crypto.randomUUID()}>{i}</span>
-        ))}
+    <div dir="rtl" className="mt-30 gap-4 text-2xl">
+        <div className="flex flex-wrap p-10 gap-10 justify-around items-center">
+            {likesArr.map((i)=>(
+                <div dir="rtl" className="card w-70 gap-3">
+                    <img className="card-img w-70" src={i.imgURL} alt="pic" />
+                    <h2 className="card-title">اسم محصول : {i.title}</h2>
+                    <h3>قیمت :‌{i.price}</h3>
+                </div>
+            ))}
+        </div>        
     </div>
   )
 }

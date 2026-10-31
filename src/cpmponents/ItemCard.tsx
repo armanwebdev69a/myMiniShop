@@ -11,12 +11,14 @@ interface item {
 
 function ItemCard( {title,price,quantity,imgURL,children} : item ) {
   return (
-        <div className="flex flex-col">
-            <img src={imgURL} alt="pic" />
+        <div className="card">
+            <img className="mix-blend" src={imgURL} alt="pic" />
             <div className="flex gap-2 flex-col items-end px-5 py-2">
-                <h2 className="text-2xl">اسم : {title}</h2>
-                <h3 className="text-xl">قیمت : {price}</h3>
-                <p className="text-xl">تعداد : {quantity}</p>
+                <h2 className="card-title">اسم : {title}</h2>
+                <div className="card-body">
+                    <h3>قیمت : {price}</h3>
+                    <p>تعداد : {quantity}</p>
+                </div>
                 {children}
             </div>
         </div>

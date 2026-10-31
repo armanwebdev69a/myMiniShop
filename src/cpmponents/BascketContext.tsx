@@ -1,16 +1,22 @@
 import React, { createContext, useContext, useState } from "react"
 
+type bascket = {
+    title:string,
+    price:number,
+    imgURL:string
+}
+
 interface Bascket {
-    bascket:string[],
-    addBascket:(item:string) =>void,
+    bascketArr:bascket[],
+    addBascket:(item:bascket) =>void,
     price:number,
     addNum : (newNum:number) =>void
 }
 const Bascket = createContext<Bascket|null>(null)
 
 export function BascketProvider( {children} : {children:React.ReactNode} ) {
-    const [bascket,setBascket] = useState<string[]>([])
-    const addBascket = (item:string)=>{
+    const [bascketArr,setBascket] = useState<bascket[]>([])
+    const addBascket = (item:bascket)=>{
         setBascket(prev => [...prev,item])
     }
     const [price,setPrice] = useState(0)
@@ -18,7 +24,7 @@ export function BascketProvider( {children} : {children:React.ReactNode} ) {
         setPrice(prev=>prev + newNum)
     }
   return (
-    <Bascket.Provider value={{bascket,addBascket,price,addNum}}>
+    <Bascket.Provider value={{bascketArr,addBascket,price,addNum}}>
         {children}
     </Bascket.Provider>
   )

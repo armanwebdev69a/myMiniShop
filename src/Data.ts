@@ -1,57 +1,77 @@
-interface item {
-    title:string,
-    id:string,
-    quantity:number
-    imgURL:string,
-    price:number
+export interface Item {
+  id: string;
+  title: string;
+  category: string;
+  price: number;
+  quantity: number;
+  imgURL: string;
 }
 
-type items = item[]
+export type Items = Item[];
 
-const datas : items = [
-    {
-        title:"شلوار",
-        price:1200,
-        id:crypto.randomUUID(),
-        quantity:3,
-        imgURL:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBdbTKZXH4Qos29Cyg0qfi5imY-u8kYFEazok-nU2rgU5gPnyxaLr0oyE&s=10"
-    },
-    {
-        title:"کفش",
-        price:2400,
-        id:crypto.randomUUID(),
-        quantity:5,
-        imgURL:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR69PeWOgKCoVdENFennPVNARW_IVxf8p4z37vpLmYd4g&s=10"
-    },
-    {
-        title:"هودی",
-        price:10000,
-        id:crypto.randomUUID(),
-        quantity:1,
-        imgURL:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNnYXZqPG_Ohp_osp7z6dHRtSZ0ybGw1Ues6JpzMKWzV8ZjBHVKgZHpmVJ&s=10"
-    },
-    {
-        title:"شلوار",
-        price:10000,
-        id:crypto.randomUUID(),
-        quantity:3,
-        imgURL:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfGIDmHxrZFo4fOW37elakrv_qJCo02tD8mv5voDRkR9d74nIdKO8mBuQ&s=10"
-    },
-    {
-        title:"کفش",
-        price:2200,
-        id:crypto.randomUUID(),
-        quantity:5,
-        imgURL:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQE0x6z-CJFuzs3uvGpqTt-EeQA8OsO0QtvGNpbh_DmSw&s=10"
-    },
-    {
-        title:"هودی",
-        price:100009,
-        id:crypto.randomUUID(),
-        quantity:1,
-        imgURL:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRA0-kIgW3cRZagfMutVNiT9356556cGsGtZNO9BVUGsqnLsrZ7w6KYrZ8w&s=10"
-    },
-    
-]
-
-export {datas }
+export const datas: Items = [
+  {
+    id: "prod-1",
+    title: "هودی مردانه کلاه‌دار مشکی استایل بیسیک",
+    category: "هودی و دورس",
+    price: 890000,
+    quantity: 4,
+    imgURL: "https://pikfree.ir/wp-content/uploads/edd/2026/08/top-view-coffee-cup-dark-background-jpg-Top-472x267.jpg"
+  },
+  {
+    id: "prod-2",
+    title: "شلوار جین راسته کلاسیک زغالی",
+    category: "شلوار",
+    price: 750000,
+    quantity: 6,
+    imgURL: "https://pikfree.ir/wp-content/uploads/edd/2026/06/free-forest-road-image-Top-472x267.jpg"
+  },
+  {
+    id: "prod-3",
+    title: "کفش پیاده‌روی و رانینگ تنفس‌پذیر سفید",
+    category: "کفش",
+    price: 1450000,
+    quantity: 3,
+    imgURL: "https://pikfree.ir/wp-content/uploads/edd/2026/06/free-image-of-a-bird-on-a-tree-branch-Top-472x267.jpg"
+  },
+  {
+    id: "prod-4",
+    title: "تی‌شرت نخی ساده آستین کوتاه یقه گرد",
+    category: "تی‌شرت",
+    price: 320000,
+    quantity: 10,
+    imgURL: "https://pikfree.ir/wp-content/uploads/edd/2026/06/free-image-of-young-girl-in-black-and-white-design-Top-472x267.jpg"
+  },
+  {
+    id: "prod-5",
+    title: "پیراهن آستین بلند طرح‌دار پاییزه",
+    category: "پیراهن",
+    price: 680000,
+    quantity: 2,
+    imgURL: "https://pikfree.ir/wp-content/uploads/edd/2026/05/dollar-bill-hand-man-free-Top-472x267.jpg"
+  },
+  {
+    id: "prod-6",
+    title: "کاپشن مردانه ضدآب بادگیر زیپ‌دار",
+    category: "کاپشن",
+    price: 1980000,
+    quantity: 1,
+    imgURL: "https://pikfree.ir/wp-content/uploads/edd/2026/06/free-image-of-a-cup-of-hot-tea-on-a-wooden-table-Top-472x267.jpg"
+  },
+  {
+    id: "prod-7",
+    title: "شلوار کتان مردانه راحتی راسته کرم خاکی",
+    category: "شلوار",
+    price: 820000,
+    quantity: 5,
+    imgURL: "https://pikfree.ir/wp-content/uploads/edd/2026/05/close-up-cups-tea-Top-472x267.jpg"
+  },
+  {
+    id: "prod-8",
+    title: "کلاه بافت زمستانی استایل ساده طوسی",
+    category: "اکسسوری",
+    price: 190000,
+    quantity: 0, // تستی برای وضعیت ناموجود
+    imgURL: "https://pikfree.ir/wp-content/uploads/edd/2026/05/cosmetics-lipstick-Top-472x267.jpg"
+  }
+];

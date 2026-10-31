@@ -5,7 +5,7 @@ import "./style.css"
 import Likes from "./cpmponents/Likes";
 import Bascket from "./cpmponents/Bascket";
 import { BascketProvider } from "./cpmponents/BascketContext";
-import LikesContext from "./cpmponents/LikesContext";
+import { LikesProvider } from "./cpmponents/LikesContext";
 import { SearchProvider } from "./cpmponents/SearchValue";
 export function NotFound(){
   return (
@@ -16,7 +16,7 @@ export function NotFound(){
 
 function App() {
   return (
-    <LikesContext>
+    <LikesProvider>
     <BascketProvider>
     <BrowserRouter>
     <SearchProvider>
@@ -26,13 +26,13 @@ function App() {
     <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/likes" element={<Likes />} />
-        <Route path="/Bascket" element={<Bascket />} />
+        <Route path="/bascket" element={<Bascket />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       </SearchProvider>
     </BrowserRouter>
     </BascketProvider>
-    </LikesContext>
+    </LikesProvider>
   )
 }
 
